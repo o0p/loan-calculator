@@ -1,6 +1,16 @@
-document.getElementById('loan-form').addEventListener('submit', calculateResults);
+document.getElementById('loan-form').addEventListener('submit', function(e){
+    //hide results
+    document.getElementById('results').style.display = 'none';
 
-function calculateResults(e) {
+    //show loader
+    document.getElementById('loading').style.display = 'block';
+
+    setTimeout(calculateResults, 2000)
+
+    e.preventDefault();
+});
+
+function calculateResults() {
     //UI vars
     const amount = document.getElementById('amount');
     const interest = document.getElementById('interest');
@@ -8,8 +18,13 @@ function calculateResults(e) {
     const monthlyPayment = document.getElementById('monthly-payment');
     const totalPayment = document.getElementById('total-payment');
     const totalInterest =  document.getElementById('total-interest');
+    //show results & hide spinner
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
 
-    // calc vars
+
+
+    //calc vars
     const principal = parseFloat(amount.value);
     const calculatedInterest = parseFloat(interest.value) / 100 / 12;
     const calculatedPayments = parseFloat(years.value) * 12;
@@ -25,12 +40,13 @@ function calculateResults(e) {
     } else {
         showError('Pleae check your numbers')
     }
-
-    e.preventDefault();
 }
 
 //error 
 function showError(error) {
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+
     const errorDiv = document.createElement('div');
 
     const card = document.querySelector('.card')
