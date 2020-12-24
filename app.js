@@ -9,5 +9,8 @@ function calculateResults(e) {
     const totalPayment = document.getElementById('total-payment');
     const totalInterest =  document.getElementById('total-interest');
 
+
+    const principal = parseFloat(amount.value);
+
     e.preventDefault();
 }
